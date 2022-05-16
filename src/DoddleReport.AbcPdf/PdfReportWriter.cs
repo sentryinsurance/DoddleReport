@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.IO;
-using WebSupergoo.ABCpdf7;
+using WebSupergoo.ABCpdf11;
 
 namespace DoddleReport.AbcPdf
 {
@@ -98,9 +98,9 @@ namespace DoddleReport.AbcPdf
             {
                 Document.PageNumber = i;
 
-                Document.AddHtml(string.Format("<h3 align='center'>{0}</h3>", textFields.Title.FormatHtml()));
-                Document.AddHtml(string.Format("<h5 align='center'>{0}</h5>", textFields.SubTitle.FormatHtml()));
-                Document.AddHtml(string.Format("<p><b>{0}</b></p>", textFields.Header.FormatHtml()));
+                Document.AddTextStyled(string.Format("<h3 align='center'>{0}</h3>", textFields.Title.FormatHtml()));
+                Document.AddTextStyled(string.Format("<h5 align='center'>{0}</h5>", textFields.SubTitle.FormatHtml()));
+                Document.AddTextStyled(string.Format("<p><b>{0}</b></p>", textFields.Header.FormatHtml()));
             }
 
 
@@ -114,8 +114,8 @@ namespace DoddleReport.AbcPdf
                 Document.Rect.Position(10, Document.MediaBox.Bottom);
                 Document.Rect.Height = 30;
                 Document.Rect.Width = width;
-                Document.HPos = 0.5;
-                Document.VPos = 0.5;
+                Document.TextStyle.HPos = 0.5;
+                Document.TextStyle.VPos = 0.5;
 
                 for (int i = 1; i <= Document.PageCount; i++)
                 {

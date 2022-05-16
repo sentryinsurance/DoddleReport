@@ -6,7 +6,7 @@ using System;
 using System.Drawing;
 using System.Collections;
 using System.Globalization;
-using WebSupergoo.ABCpdf7;
+using WebSupergoo.ABCpdf11;
 
 namespace DoddleReport.AbcPdf
 {
@@ -48,8 +48,8 @@ namespace DoddleReport.AbcPdf
         /// </summary>
         public double HorizontalAlignment
         {
-            get { return mDoc.HPos; }
-            set { mDoc.HPos = value; }
+            get { return mDoc.TextStyle.HPos; }
+            set { mDoc.TextStyle.HPos = value; }
         }
 
         /// <summary>
@@ -649,7 +649,7 @@ namespace DoddleReport.AbcPdf
                     mDoc.Rect.Inset(CellPadding, CellPadding);
                     PageNumber = RowTop.PageNr;
 
-                    id = mDoc.AddHtml(inHtml);
+                    id = mDoc.AddTextStyled(inHtml);
                     if ((id == 0) || (mDoc.Chainable(id)))
                     {
                         if (inMoveRows)
