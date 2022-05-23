@@ -67,8 +67,7 @@ namespace DoddleReport.Configuration
         {
             get
             {
-                var c = new ColorConverter();
-                return (Color)c.ConvertFrom(BackColorString);
+                return ColorTranslator.FromHtml(BackColorString);
             }
             set { this["backColor"] = value.ToString(); }
         }
@@ -77,8 +76,7 @@ namespace DoddleReport.Configuration
         {
             get
             {
-                var c = new ColorConverter();
-                return (Color)c.ConvertFrom(ForeColorString);
+                return ColorTranslator.FromHtml(ForeColorString);
             }
             set { this["foreColor"] = value.ToString(); }
         }

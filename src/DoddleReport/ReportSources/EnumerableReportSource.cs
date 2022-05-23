@@ -103,17 +103,18 @@ namespace DoddleReport.ReportSources
         /// <returns>The order number for the field.</returns>
         private static int SetReportFieldProperties(Type itemType, PropertyInfo propInfo, ReportField reportField)
         {
-            var metadataTypeAttribute = itemType.GetAttribute<MetadataTypeAttribute>();
+            // TODO:  MetadataTypeAttribute is not available in .NET Standard/Core
+            //var metadataTypeAttribute = itemType.GetAttribute<MetadataTypeAttribute>();
             MemberInfo memberInfo;
-            if (metadataTypeAttribute != null)
-            {
+            //if (metadataTypeAttribute != null)
+            //{
                 memberInfo = itemType.GetProperty(propInfo.Name, BindingFlags.Public | BindingFlags.Instance) ??
                              (MemberInfo) itemType.GetField(propInfo.Name, BindingFlags.Public | BindingFlags.Instance);
-            }
-            else
-            {
-                memberInfo = propInfo;
-            }
+            //}
+            //else
+            //{
+            //   memberInfo = propInfo;
+            //}
 
             if (memberInfo != null)
             {
