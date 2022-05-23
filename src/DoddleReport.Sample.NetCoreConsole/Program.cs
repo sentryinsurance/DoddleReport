@@ -32,8 +32,8 @@ report.DataFields["Id"].Hidden = true;
 report.DataFields["Price"].DataFormatString = "{0:c}";
 report.DataFields["LastPurchase"].DataFormatString = "{0:d}";
 
-var writer = new HtmlReportWriter();
-using var outputStream = System.IO.File.Create("c:\\temp\\test.html");
+var writer = new DoddleReport.OpenXml.ExcelReportWriter();
+using var outputStream = System.IO.File.Create("c:\\temp\\test.xlsx");
 
 writer.WriteReport(report, outputStream);
 

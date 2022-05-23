@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DoddleReport.OpenXml\DoddleReport.OpenXml.csproj" />
     <ProjectReference Include="..\DoddleReport\DoddleReport.csproj" />
   </ItemGroup>
 
