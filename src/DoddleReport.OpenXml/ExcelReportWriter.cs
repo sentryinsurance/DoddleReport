@@ -345,8 +345,8 @@ namespace DoddleReport.OpenXml
             RenderFooter(worksheet, fieldsCount, report.TextFields, report.RenderHints, rowCount);
 
 
-            // TODO: AdjustToContents renders horribly when deployed to an Azure Website, need to determine why
-
+            // TODO:  commenting out this for now since AdjustToContents and PixelsToUnits is broken on Linux
+            /*
             // Adjust the width of all the columns
             for (int i = 0; i < fieldsCount; i++)
             {
@@ -373,6 +373,7 @@ namespace DoddleReport.OpenXml
             }
 
             worksheet.Columns().AdjustToContents();
+            */
 
             // Check if the current writer needs to append another report to the report we just generated
             if (ReportsToAppend.ContainsKey(report))

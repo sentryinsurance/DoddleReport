@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using ClosedXML.Excel;
 
 namespace DoddleReport.OpenXml
@@ -59,6 +58,8 @@ namespace DoddleReport.OpenXml
             xlStyle.Alignment.TextRotation = reportStyle.TextRotation;
         }
 
+        // TODO:  commenting out this for now since AdjustToContents and PixelsToUnits is broken on Linux
+        /*
         /// <summary>
         /// Pixels to point.
         /// </summary>
@@ -83,7 +84,7 @@ namespace DoddleReport.OpenXml
             double maxDigitWidth = Digits.Select(d => TextRenderer.MeasureText("_" + d + "_", font).Width - underscoreWidth).Max();
             return Math.Truncate((pixels - 5) / maxDigitWidth * 100 + 0.5) / 100;
         }
-
+        */
         #endregion
     }
 }

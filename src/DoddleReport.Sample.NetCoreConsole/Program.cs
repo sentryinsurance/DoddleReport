@@ -63,7 +63,11 @@ public class Product
     public string Name { get; set; }
     public string Description { get; set; }
     public double Price { get; set; }
-    public DateTime LastPurchase { get; set; }
     public int OrderCount { get; set; }
+    public DateTime? LastPurchase { get; set; }
     public int UnitsInStock { get; set; }
+    public bool? LowStock
+    {
+        get { return UnitsInStock < 300; }
+    }
 }
