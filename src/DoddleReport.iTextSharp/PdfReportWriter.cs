@@ -30,63 +30,62 @@ namespace DoddleReport.iTextSharp
 
             var margins = report.RenderHints.Margins;
             var doc = new Document(pageSize, margins.Width, margins.Width, margins.Height, margins.Height);
-            using (PdfWriter.GetInstance(doc, destination))
+            var writer = PdfWriter.GetInstance(doc, destination);
+
+            doc.Open();
+
+            var globalTable = new PdfPTable(1)
+                                    {
+                                        HeaderRows = 1, 
+                                        WidthPercentage = 100
+                                    };
+
+            // Render the header
+            RenderHeader(globalTable, report.TextFields, report.RenderHints);
+
+            // Render all the rows
+            int fieldsCount = report.DataFields.Count(f => !f.Hidden);
+            var table = new PdfPTable(fieldsCount)
+                            {
+                                HeaderRows = 1, 
+                                WidthPercentage = 100
+                            };
+
+
+            foreach (ReportRow row in report.GetRows())
             {
-                doc.Open();
-
-                var globalTable = new PdfPTable(1)
-                                      {
-                                          HeaderRows = 1, 
-                                          WidthPercentage = 100
-                                      };
-
-                // Render the header
-                RenderHeader(globalTable, report.TextFields, report.RenderHints);
-
-                // Render all the rows
-                int fieldsCount = report.DataFields.Count(f => !f.Hidden);
-                var table = new PdfPTable(fieldsCount)
-                                {
-                                    HeaderRows = 1, 
-                                    WidthPercentage = 100
-                                };
-
-
-                foreach (ReportRow row in report.GetRows())
+                foreach (RowField field in row.Fields.Where(f => !f.Hidden))
                 {
-                    foreach (RowField field in row.Fields.Where(f => !f.Hidden))
+                    PdfPCell cell;
+                    if (row.RowType == ReportRowType.HeaderRow)
                     {
-                        PdfPCell cell;
-                        if (row.RowType == ReportRowType.HeaderRow)
-                        {
-                            cell = CreateTextCell(field.HeaderStyle, report.RenderHints[FontFamily] as string,
-                                                  field.HeaderText);
-                        }
-                        else
-                        {
-							var url = row.GetUrlString(field);
-
-							cell = url == null
-								? CreateTextCell(field.DataStyle, report.RenderHints[FontFamily] as string, row.GetFormattedValue(field))
-								: CreateHyperLinkCell(url, row.GetFormattedValue(field));
-                        }
-
-                        cell.Border = 0;
-                        cell.Padding = 5;
-                        table.AddCell(cell);
+                        cell = CreateTextCell(field.HeaderStyle, report.RenderHints[FontFamily] as string,
+                                                field.HeaderText);
                     }
+                    else
+                    {
+						var url = row.GetUrlString(field);
+
+						cell = url == null
+							? CreateTextCell(field.DataStyle, report.RenderHints[FontFamily] as string, row.GetFormattedValue(field))
+							: CreateHyperLinkCell(url, row.GetFormattedValue(field));
+                    }
+
+                    cell.Border = 0;
+                    cell.Padding = 5;
+                    table.AddCell(cell);
                 }
-
-                globalTable.AddCell(new PdfPCell(table) { Border = 0 });
-
-
-                // Render the footer
-                RenderFooter(globalTable, report.TextFields, report.RenderHints);
-
-                doc.Add(globalTable);
-                doc.Close();
-
             }
+
+            globalTable.AddCell(new PdfPCell(table) { Border = 0 });
+
+
+            // Render the footer
+            RenderFooter(globalTable, report.TextFields, report.RenderHints);
+
+            doc.Add(globalTable);
+            doc.Close();
+
         }
 
         /// <summary>
