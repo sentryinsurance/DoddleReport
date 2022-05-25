@@ -29,16 +29,35 @@ report.RenderHints.BooleanCheckboxes = true;
 report.DataFields["Id"].Hidden = true;
 report.DataFields["Price"].DataFormatString = "{0:c}";
 report.DataFields["LastPurchase"].DataFormatString = "{0:d}";
+report.DataFields["Description"].DataStyle.Width = 400;
 report.DataFields["Price"].DataStyle.Width = 200;
 
-//ProduceReport(new DoddleReport.Writers.HtmlReportWriter(), report, "c:\\temp\\doddlereportHtml.html");
+ProduceReport(new DoddleReport.Writers.HtmlReportWriter(), report, "c:\\temp\\doddlereportHtml.html");
 //ProduceReport(new DoddleReport.Writers.ExcelReportWriter(), report, "c:\\temp\\doddlereportClassicExcel.xls");
 //ProduceReport(new DoddleReport.Writers.DelimitedTextReportWriter(), report, "c:\\temp\\doddlereportDelimitedText.txt");
 ProduceReport(new DoddleReport.OpenXml.ExcelReportWriter(), report, "c:\\temp\\doddlereportOpenXml.xlsx");
 //ProduceReport(new DoddleReport.iTextSharp.PdfReportWriter(), report, "c:\\temp\\doddlereportPdf.pdf");
 
+using (var book = new ClosedXML.Excel.XLWorkbook())
+{
+    var sheet = book.AddWorksheet();
+    sheet.Cell("a1").Value = "BillId";
+    sheet.Cell("b1").Value = "Date";
+    sheet.Cell("a2").Value = "Product 1";
+    sheet.Cell("b2").Value = "Some random lines of text Some random lines of text Some random lines of text";
+    //sheet.Cell("b2").Style.Font.SetFontSize(9);
+    sheet.Style.Font.SetFontSize(9);
+    //sheet.Columns("a:b").Style.Font.SetFontSize(9);
+    sheet.Columns().AdjustToContents();
+
+    book.SaveAs("c:\\temp\\asdf.xlsx");
+}
+
+
 Console.WriteLine("Done!");
 Console.ReadLine();
+
+
 
 static List<Product> GetAll()
 {

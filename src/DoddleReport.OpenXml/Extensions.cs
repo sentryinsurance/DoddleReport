@@ -58,7 +58,7 @@ namespace DoddleReport.OpenXml
             xlStyle.Alignment.TextRotation = reportStyle.TextRotation;
         }
 
-        // TODO:  how to handle PixelsToUnits in a Linux world
+
 
         /// <summary>
         /// Pixels to point.
@@ -71,28 +71,19 @@ namespace DoddleReport.OpenXml
         /// <remarks>
         /// The formula is documented there: http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column.aspx
         /// </remarks>
-        public static double PixelsToUnits(this int pixels, IXLFont xlFont)
+        public static double PixelsToUnits(this int pixels)
         {
+            // TODO:  how to handle PixelsToUnits in a Linux world
+            // for now, it seems like assuming a font width of 7 works fine
             if (pixels < 5)
             {
                 pixels = 5;
             }
-
-            var fontSize = (float)xlFont.FontSize;
-            var font = new Font(xlFont.FontName, fontSize, FontStyle.Regular);
-            using(Graphics g = Graphics.FromHwnd(IntPtr.Zero))
-            {
-                //int underscoreWidth = TextRenderer.MeasureText("__", font).Width;
-                //double maxDigitWidth = Digits.Select(d => TextRenderer.MeasureText("_" + d + "_", font).Width - underscoreWidth).Max();
-
-                float underscoreWidth = g.MeasureString("__", font).Width;
-                float maxDigitWidth = Digits.Select(d => g.MeasureString("_" + d + "_", font).Width - underscoreWidth).Max();
-
-                return Math.Truncate((pixels - 5) / maxDigitWidth * 100 + 0.5) / 100;
-
-            }
+            return Math.Truncate((pixels - 5) / 7f * 100 + 0.5) / 100;
+  
         }
         
         #endregion
     }
+
 }

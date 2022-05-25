@@ -16,12 +16,12 @@ namespace DoddleReport
 
             if (style.BackColor != Color.White)
             {
-                css.AppendFormat("background-color: {0};", ColorTranslator.ToHtml(style.BackColor));
+                css.AppendFormat("background-color: {0};", ToHtml(style.BackColor));
             }
 
             if (style.ForeColor != Color.Black)
             {
-                css.AppendFormat("color: {0};", ColorTranslator.ToHtml(style.ForeColor));
+                css.AppendFormat("color: {0};", ToHtml(style.ForeColor));
             }
 
             if (style.FontSize != 8)
@@ -63,6 +63,37 @@ namespace DoddleReport
         public static string FormatHtml(this string source)
         {
             return source.Replace(Environment.NewLine, "<br />");
+        }
+
+        // This is copied from the System.Drawing.ColorTranslator.ToHtml source code, to avoid a dependency on System.Drawing.Common
+        // https://referencesource.microsoft.com/#System.Drawing/commonui/System/Drawing/Advanced/ColorTranslator.cs
+        private static string ToHtml(Color c)
+        {
+            string colorString = String.Empty;
+
+            if (c.IsEmpty)
+                return colorString;
+
+             if (c.IsNamedColor)
+            {
+                if (c == Color.LightGray)
+                {
+                    // special case due to mismatch between Html and enum spelling
+                    colorString = "LightGrey";
+                }
+                else
+                {
+                    colorString = c.Name;
+                }
+            }
+            else
+            {
+                colorString = "#" + c.R.ToString("X2", null) +
+                                    c.G.ToString("X2", null) +
+                                    c.B.ToString("X2", null);
+            }
+
+            return colorString;
         }
     }
 }

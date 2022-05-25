@@ -346,33 +346,19 @@ namespace DoddleReport.OpenXml
 
 
             // TODO:  how to handle AdjustToContents and PixelsToUnits in a Linux world
+            // for now we simply don't support AdjustToContents and force
+            // the developer to assign a width, with a reasonable default of 100px
 
             // Adjust the width of all the columns
             for (int i = 0; i < fieldsCount; i++)
             {
                 var reportField = report.DataFields.Where(f => !f.Hidden).Skip(i).Take(1).Single();
                 var width = new int[] { reportField.DataStyle.Width, reportField.FooterStyle.Width, reportField.HeaderStyle.Width }.Max();
-                var adjustToContents = report.RenderHints[AdjustColumnWidthToContents] as bool? ?? true;
 
-                if (adjustToContents || width > 0)
-                {
-                    var column = worksheet.Column(i + 1);
-                    if (adjustToContents && width > 0)
-                    {
-                        column.AdjustToContents(width.PixelsToUnits(column.Style.Font), double.MaxValue);
-                    }
-                    else if (adjustToContents)
-                    {
-                        column.AdjustToContents(1, 50, 5.0, 100.0);
-                    }
-                    else
-                    {
-                        column.Width = width.PixelsToUnits(column.Style.Font);
-                    }
-                }
+                if (width == 0) width = 100;  // default of 100px per column
+                var column = worksheet.Column(i + 1);
+                column.Width = width.PixelsToUnits();            
             }
-
-            //worksheet.Columns().AdjustToContents();
 
 
             // Check if the current writer needs to append another report to the report we just generated
