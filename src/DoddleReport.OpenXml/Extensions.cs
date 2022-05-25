@@ -58,8 +58,8 @@ namespace DoddleReport.OpenXml
             xlStyle.Alignment.TextRotation = reportStyle.TextRotation;
         }
 
-        // TODO:  commenting out this for now since AdjustToContents and PixelsToUnits is broken on Linux
-        /*
+        // TODO:  how to handle PixelsToUnits in a Linux world
+
         /// <summary>
         /// Pixels to point.
         /// </summary>
@@ -80,11 +80,19 @@ namespace DoddleReport.OpenXml
 
             var fontSize = (float)xlFont.FontSize;
             var font = new Font(xlFont.FontName, fontSize, FontStyle.Regular);
-            int underscoreWidth = TextRenderer.MeasureText("__", font).Width;
-            double maxDigitWidth = Digits.Select(d => TextRenderer.MeasureText("_" + d + "_", font).Width - underscoreWidth).Max();
-            return Math.Truncate((pixels - 5) / maxDigitWidth * 100 + 0.5) / 100;
+            using(Graphics g = Graphics.FromHwnd(IntPtr.Zero))
+            {
+                //int underscoreWidth = TextRenderer.MeasureText("__", font).Width;
+                //double maxDigitWidth = Digits.Select(d => TextRenderer.MeasureText("_" + d + "_", font).Width - underscoreWidth).Max();
+
+                float underscoreWidth = g.MeasureString("__", font).Width;
+                float maxDigitWidth = Digits.Select(d => g.MeasureString("_" + d + "_", font).Width - underscoreWidth).Max();
+
+                return Math.Truncate((pixels - 5) / maxDigitWidth * 100 + 0.5) / 100;
+
+            }
         }
-        */
+        
         #endregion
     }
 }

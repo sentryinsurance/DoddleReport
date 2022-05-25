@@ -1,5 +1,4 @@
 ﻿using DoddleReport;
-using DoddleReport.Writers;
 
 // See https://aka.ms/new-console-template for more information
 
@@ -15,7 +14,6 @@ var totalOrders = products.Sum(p => p.OrderCount);
 // Customize the Text Fields
 report.TextFields.Title = "Products Report";
 report.TextFields.SubTitle = "This is a sample report showing how Doddle Report works";
-report.TextFields.Footer = "Copyright 2011 &copy; The Doddle Project";
 report.TextFields.Header = string.Format(@"
     Report Generated: {0}
     Total Products: {1}
@@ -31,11 +29,13 @@ report.RenderHints.BooleanCheckboxes = true;
 report.DataFields["Id"].Hidden = true;
 report.DataFields["Price"].DataFormatString = "{0:c}";
 report.DataFields["LastPurchase"].DataFormatString = "{0:d}";
+report.DataFields["Price"].DataStyle.Width = 200;
 
-var writer = new DoddleReport.OpenXml.ExcelReportWriter();
-using var outputStream = System.IO.File.Create("c:\\temp\\test.xlsx");
-
-writer.WriteReport(report, outputStream);
+//ProduceReport(new DoddleReport.Writers.HtmlReportWriter(), report, "c:\\temp\\doddlereportHtml.html");
+//ProduceReport(new DoddleReport.Writers.ExcelReportWriter(), report, "c:\\temp\\doddlereportClassicExcel.xls");
+//ProduceReport(new DoddleReport.Writers.DelimitedTextReportWriter(), report, "c:\\temp\\doddlereportDelimitedText.txt");
+ProduceReport(new DoddleReport.OpenXml.ExcelReportWriter(), report, "c:\\temp\\doddlereportOpenXml.xlsx");
+//ProduceReport(new DoddleReport.iTextSharp.PdfReportWriter(), report, "c:\\temp\\doddlereportPdf.pdf");
 
 Console.WriteLine("Done!");
 Console.ReadLine();
@@ -47,14 +47,20 @@ static List<Product> GetAll()
         .Select(i => new Product
         {
             Id = i,
-            Name = "Product " + i,
-            Description = "Some random lines of text",
+            Name = "Product " + i, 
+            Description = "Some random lines of text Some random lines of text Some random lines of text",
             Price = rand.NextDouble() * 100,
             OrderCount = rand.Next(1000),
             LastPurchase = DateTime.Now.AddDays(rand.Next(1000)),
             UnitsInStock = rand.Next(0, 2000)
         })
         .ToList();
+}
+
+static void ProduceReport(IReportWriter reportWriter, Report report, string filename)
+{
+    using var outputStream = System.IO.File.Create(filename);
+    reportWriter.WriteReport(report, outputStream);
 }
 
 public class Product
