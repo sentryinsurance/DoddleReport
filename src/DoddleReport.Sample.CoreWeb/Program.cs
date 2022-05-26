@@ -51,5 +51,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapReportingRoute();
+app.MapReportingRouteWithAreaSupport();
 
 app.Run();
