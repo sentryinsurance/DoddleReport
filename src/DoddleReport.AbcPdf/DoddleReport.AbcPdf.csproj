@@ -127,9 +127,6 @@
       <Name>DoddleReport</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="ABCpdfQuickStart.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\ABCpdf.12.2.0.4\build\ABCpdf.targets" Condition="Exists('..\packages\ABCpdf.12.2.0.4\build\ABCpdf.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -6,19 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="bad.file" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="bad.file">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DoddleReport.Core.Web\DoddleReport.Core.Web.csproj" />
+    <ProjectReference Include="..\DoddleReport.iTextSharp\DoddleReport.iTextSharp.csproj" />
     <ProjectReference Include="..\DoddleReport.OpenXml\DoddleReport.OpenXml.csproj" />
     <ProjectReference Include="..\DoddleReport\DoddleReport.csproj" />
   </ItemGroup>

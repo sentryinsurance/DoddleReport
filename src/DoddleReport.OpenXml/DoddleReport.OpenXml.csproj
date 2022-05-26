@@ -12,7 +12,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.95.4" />
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
 </Project>

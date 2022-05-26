@@ -1,6 +1,6 @@
 ﻿using DoddleReport.Sample.CoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using DoddleReport.Web;
 using System.Drawing;
 
 namespace DoddleReport.Sample.CoreWeb.Controllers
@@ -18,7 +18,7 @@ namespace DoddleReport.Sample.CoreWeb.Controllers
         {
 			var report = ProductReport();
 
-			return new DoddleReport.Web.ReportResult(report);
+			return new ReportResult(report);
 		}
 
 		private Report ProductReport()

@@ -84,7 +84,7 @@ namespace DoddleReport.Web
             if (writerConfig == null)
                 throw new InvalidOperationException(
                     string.Format(
-                        "Unable to locate a report writer for the extension '{0}'. Did you add this fileExtension to the web.config for DoddleReport?",
+                        "Unable to locate a report writer for the extension '{0}'. Did you add this extension to the DoddleReport configuration?",
                         extension));
 
             return writerConfig;

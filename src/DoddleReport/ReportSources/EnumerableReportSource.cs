@@ -103,18 +103,10 @@ namespace DoddleReport.ReportSources
         /// <returns>The order number for the field.</returns>
         private static int SetReportFieldProperties(Type itemType, PropertyInfo propInfo, ReportField reportField)
         {
-            // TODO:  MetadataTypeAttribute is not available in .NET Standard/Core
-            //var metadataTypeAttribute = itemType.GetAttribute<MetadataTypeAttribute>();
-            MemberInfo memberInfo;
-            //if (metadataTypeAttribute != null)
-            //{
-                memberInfo = itemType.GetProperty(propInfo.Name, BindingFlags.Public | BindingFlags.Instance) ??
+
+            var memberInfo = itemType.GetProperty(propInfo.Name, BindingFlags.Public | BindingFlags.Instance) ??
                              (MemberInfo) itemType.GetField(propInfo.Name, BindingFlags.Public | BindingFlags.Instance);
-            //}
-            //else
-            //{
-            //   memberInfo = propInfo;
-            //}
+
 
             if (memberInfo != null)
             {
@@ -132,14 +124,12 @@ namespace DoddleReport.ReportSources
                     reportField.HeaderText = displayNameAttribute.DisplayName;
                 }
 
-#if !NET35
                 var displayAttribute = memberInfo.GetAttribute<DisplayAttribute>();
                 if (displayAttribute != null)
                 {
                     reportField.HeaderText = displayAttribute.GetShortName();
                     return displayAttribute.GetOrder() ?? MaxColumn;
                 }
-#endif
             }
 
             return MaxColumn;

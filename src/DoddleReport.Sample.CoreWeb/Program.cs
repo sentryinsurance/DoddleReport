@@ -20,6 +20,15 @@ DoddleReport.Configuration.Config.Report.Writers.Add(
         OfferDownload = true
     });
 
+DoddleReport.Configuration.Config.Report.Writers.Add(
+    new DoddleReport.Configuration.WriterElement
+    {
+        Writer = new DoddleReport.iTextSharp.PdfReportWriter(),
+        FileExtension = ".pdf",
+        ContentType = "application/pdf",
+        OfferDownload = true
+    });
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
