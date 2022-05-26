@@ -1,49 +1,21 @@
-﻿using System.Configuration;
+﻿
+
+using System.Collections.Generic;
 
 namespace DoddleReport.Configuration
 {
-    public sealed class DoddleReportSection : ConfigurationSection
+    public sealed class DoddleReportSection
     {
-        [ConfigurationProperty("writers", IsRequired = true)]
-        public WriterElementCollection Writers
-        {
-            get { return (WriterElementCollection)this["writers"]; }
-            set { this["writers"] = value; }
-        }
+        public WriterElementCollection Writers { get; set; } = new WriterElementCollection();
 
-        [ConfigurationProperty("styles")]
-        public StyleElementCollection Styles
-        {
-            get { return (StyleElementCollection)this["styles"]; }
-            set { this["styles"] = value; }
-        }
+        public StyleElementCollection Styles { get; set; } = new StyleElementCollection();
 
-        [ConfigurationProperty("defaultWriter", DefaultValue = "Html")]
-        public string DefaultWriter
-        {
-            get { return (string)base["defaultWriter"]; }
-            set { base["defaultWriter"] = value; }
-        }
+        public string DefaultWriter { get; set; } = "Html";
 
-        [ConfigurationProperty("dataRowStyle", DefaultValue = "DataRowStyle")]
-        public string DataRowStyleName
-        {
-            get { return (string) this["dataRowStyle"]; }
-            set { this["dataRowStyle"] = value; }
-        }
+        public string DataRowStyleName { get; set; } = "DataRowStyle";
 
-        [ConfigurationProperty("headerRowStyle", DefaultValue = "HeaderRowStyle")]
-        public string HeaderRowStyleName
-        {
-            get { return (string) this["headerRowStyle"]; }
-            set { this["headerRowStyle"] = value; }
-        }
+        public string HeaderRowStyleName { get; set; } = "HeaderRowStyle";
 
-        [ConfigurationProperty("footerRowStyle", DefaultValue = "FooterRowStyle")]
-        public string FooterRowStyleName
-        {
-            get { return (string) this["footerRowStyle"]; }
-            set { this["footerRowStyle"] = value; }
-        }
+        public string FooterRowStyleName { get; set; } = "FooterRowStyle";
     }
 }

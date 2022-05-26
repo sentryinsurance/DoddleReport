@@ -1,11 +1,11 @@
 using System.Configuration;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace DoddleReport.Configuration
 {
-    [ConfigurationCollection(typeof(WriterElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-    public class WriterElementCollection : ConfigurationElementCollection
+    public class WriterElementCollection : List<WriterElement>
     {
         public WriterElementCollection()
         {
@@ -17,7 +17,7 @@ namespace DoddleReport.Configuration
             var htmlElement = new WriterElement
              {
                  Format = "Html",
-                 TypeName = "DoddleReport.Writers.HtmlReportWriter, DoddleReport",
+                 Writer = new DoddleReport.Writers.HtmlReportWriter(),
                  ContentType = "text/html",
                  FileExtension = ".htm"
              };
@@ -25,7 +25,7 @@ namespace DoddleReport.Configuration
             var excelElement = new WriterElement
             {
                 Format = "Excel",
-                TypeName = "DoddleReport.Writers.ExcelReportWriter, DoddleReport",
+                Writer = new DoddleReport.Writers.ExcelReportWriter(),
                 ContentType = "application/vnd.ms-excel",
                 FileExtension = ".xls"
             };
@@ -33,50 +33,36 @@ namespace DoddleReport.Configuration
             var txtElement = new WriterElement
             {
                 Format = "Delimited",
-                TypeName = "DoddleReport.Writers.DelimitedTextReportWriter, DoddleReport",
+                Writer = new DoddleReport.Writers.DelimitedTextReportWriter(),
                 ContentType = "text/plain",
                 FileExtension = ".txt",
                 OfferDownload = true
             };
-   
 
-            BaseAdd(htmlElement);
-            BaseAdd(txtElement);
-            BaseAdd(excelElement);
-        }
-
-        protected override ConfigurationElement CreateNewElement()
-        {
-            return new WriterElement();
-        }
-
-        protected override object GetElementKey(ConfigurationElement element)
-        {
-            return ((WriterElement)element).Format;
+            Add(htmlElement);
+            Add(txtElement);
+            Add(excelElement); 
         }
 
         public WriterElement GetWriterConfigurationByFormat(string format)
         {
-            var key = 
-                BaseGetAllKeys().OfType<string>().FirstOrDefault(
-                    k => k.Equals(format, StringComparison.OrdinalIgnoreCase));
+            var writerElement = this.FirstOrDefault(k => k.Format.Equals(format, StringComparison.OrdinalIgnoreCase));
 
-            if(key == null)
-                throw new ArgumentException(string.Format("Unable to locate a ReportWriter Configuration with the format '{0}'. Has this format been registered in web.config?", format));
+            if(writerElement == null)
+                throw new ArgumentException(string.Format("Unable to locate a ReportWriter Configuration with the format '{0}'. Has this format been registered in configuration?", format));
 
-            return ((WriterElement)BaseGet(key));
+            return writerElement;
         }
 
         public WriterElement GetWriterConfigurationForFileExtension(string extension)
         {
-            return
-                BaseGetAllKeys()
-                    .Cast<string>()
-                    .Where(key =>
-                           GetWriterConfigurationByFormat(key).FileExtension.Equals(extension,
-                                                                                    StringComparison.InvariantCultureIgnoreCase))
-                    .Select(GetWriterConfigurationByFormat)
-                    .FirstOrDefault();
+
+            var writerElement = this.FirstOrDefault(k => k.FileExtension.Equals(extension, StringComparison.OrdinalIgnoreCase));
+
+            if (writerElement == null)
+                throw new ArgumentException(string.Format("Unable to locate a ReportWriter Configuration with the extension '{0}'. Has this format been registered in configuration?", extension));
+
+            return writerElement;
         }
 
 
@@ -84,7 +70,7 @@ namespace DoddleReport.Configuration
         {
             try
             {
-                var writer = Activator.CreateInstance(GetWriterConfigurationForFileExtension(extension).Type) as IReportWriter;
+                var writer = GetWriterConfigurationForFileExtension(extension).Writer;
                 return writer;
             }
             catch
@@ -97,7 +83,7 @@ namespace DoddleReport.Configuration
         {
             try
             {
-                var writer = Activator.CreateInstance(GetWriterConfigurationByFormat(name).Type) as IReportWriter;
+                var writer = GetWriterConfigurationByFormat(name).Writer;
                 return writer;
             }
             catch

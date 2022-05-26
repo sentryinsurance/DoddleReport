@@ -1,87 +1,24 @@
-using System.Configuration;
 using System.Drawing;
 
 namespace DoddleReport.Configuration
 {
-    public sealed class StyleElement : ConfigurationElement
+    public sealed class StyleElement
     {
-        [ConfigurationProperty("name", IsRequired = true)]
-        public string Name
-        {
-            get { return (string) this["name"]; }
-            set { this["name"] = value; }
-        }
+        public string Name { get; set; }
 
-        [ConfigurationProperty("bold", DefaultValue = false)]
-        public bool Bold
-        {
-            get { return (bool) this["bold"]; }
-            set { this["bold"] = value; }
-        }
+        public bool Bold { get; set; } = false;
 
-        [ConfigurationProperty("underline", DefaultValue = false)]
-        public bool Underline
-        {
-            get { return (bool)this["underline"]; }
-            set { this["underline"] = value; }
-        }
+        public bool Underline { get; set; } = false;
 
-        [ConfigurationProperty("italic", DefaultValue = false)]
-        public bool Italic
-        {
-            get { return (bool)this["italic"]; }
-            set { this["italic"] = value; }
-        }
+        public bool Italic { get; set; } = false;
 
-        [IntegerValidator(MinValue=6, MaxValue=72)]
-        [ConfigurationProperty("fontSize", DefaultValue = 9)]
-        public int FontSize
-        {
-            get { return (int) this["fontSize"]; }
-            set { this["fontSize"] = value; }
-        }
+        public int FontSize { get; set; } = 9;
 
-        [IntegerValidator(MinValue = -90, MaxValue = 90)]
-        [ConfigurationProperty("textRotation", DefaultValue = 0)]
-        public int TextRotation
-        {
-            get { return (int)this["textRotation"]; }
-            set { this["textRotation"] = value; }
-        }
+        public int TextRotation { get; set; } = 0;
 
-        [ConfigurationProperty("backColor", DefaultValue = "White")]
-        public string BackColorString
-        {
-            get { return (string) this["backColor"]; }
-            set { this["backColor"] = value; }
-        }
+        public Color BackColor { get; set; } = Color.White;
 
-        [ConfigurationProperty("foreColor", DefaultValue = "Black")]
-        public string ForeColorString
-        {
-            get { return (string) this["foreColor"]; }
-            set { this["foreColor"] = value; }
-        }
-
-        public Color BackColor
-        {
-            get
-            {
-                return System.Drawing.Color.FromName(BackColorString);
-            }
-            set { this["backColor"] = value.ToString(); }
-        }
-
-        public Color ForeColor
-        {
-            get
-            {
-                return System.Drawing.Color.FromName(ForeColorString);
-            }
-            set { this["foreColor"] = value.ToString(); }
-        }
-
-        // TODO: Add Alignment enums
+        public Color ForeColor { get; set; } = Color.Black;
 
         internal void ApplyStyle(ReportStyle reportStyle)
         {

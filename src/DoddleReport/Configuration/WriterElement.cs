@@ -1,71 +1,22 @@
 using System;
-using System.Configuration;
 
 namespace DoddleReport.Configuration
 {
-    public class WriterElement : ConfigurationElement
+    public class WriterElement
     {
-        [ConfigurationProperty("format", IsRequired = true)]
-        public string Format
-        {
-            get { return (string)this["format"]; }
-            set { this["format"] = value; }
-        }
+        public string Format { get; set; }
 
-        public Type Type
-        {
-            get
-            {
-                return Type.GetType(TypeName);
-            }
-            
-        }
+        public IReportWriter Writer { get; set; }
 
-        [ConfigurationProperty("type", IsRequired = true)]
-        public string TypeName
-        {
-            get
-            {
-                return (string)base["type"];
-            }
-            set
-            {
-                base["type"] = value;
-            }
-        }
+        public string ContentType { get; set; } = "text/html";
 
-        [ConfigurationProperty("contentType", DefaultValue = "text/html")]
-        public string ContentType
-        {
-            get { return (string) this["contentType"]; }
-            set { this["contentType"] = value; }
-        }
+        public bool OfferDownload { get; set; } = false;
 
-        [ConfigurationProperty("offerDownload", DefaultValue = false)]
-        public bool OfferDownload
-        {
-            get { return (bool) this["offerDownload"]; }
-            set { this["offerDownload"] = value; }
-        }
-
-        [ConfigurationProperty("fileExtension", IsRequired = true)]
-        public string FileExtension
-        {
-            get { return (string) this["fileExtension"]; }
-            set { this["fileExtension"] = value; }
-        }
+        public string FileExtension { get; set; }
 
         public IReportWriter LoadWriter()
         {
-            try
-            {
-                var writer = Activator.CreateInstance(Type) as IReportWriter;
-                return writer;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException(string.Format("Unable to load the ReportWriter format '{0}' because the type '{1}' could not be created", Format, TypeName), ex);
-            }
+            return Writer;
         }     
     }
 }

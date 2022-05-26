@@ -33,6 +33,17 @@ namespace DoddleReport.Sample.Web
 
         protected void Application_Start()
         {
+            DoddleReport.Configuration.Config.Report.Writers.Add(
+            new DoddleReport.Configuration.WriterElement
+            {
+                Writer = new DoddleReport.OpenXml.ExcelReportWriter(),
+                FileExtension = ".xlsx",
+                ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                OfferDownload = true
+            });
+
+            //Configuration.Config.Report.Styles[Configuration.Config.Report.HeaderRowStyleName].Underline = true;
+
             TryRegisterAbcPdf();
             
             AreaRegistration.RegisterAllAreas();

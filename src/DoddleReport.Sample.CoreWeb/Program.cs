@@ -1,9 +1,24 @@
-var builder = WebApplication.CreateBuilder(args);
+using DoddleReport.Web;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+DoddleReport.Configuration.Config.Report.Writers.Add(
+    new DoddleReport.Configuration.WriterElement
+    {
+        Writer = new DoddleReport.OpenXml.ExcelReportWriter(),
+        FileExtension = ".xlsx",
+        ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        OfferDownload = true
+    });
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -21,5 +36,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapReportingRoute();
 
 app.Run();

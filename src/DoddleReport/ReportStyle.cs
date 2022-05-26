@@ -1,5 +1,6 @@
 using System.Drawing;
 using DoddleReport.Configuration;
+using System.Linq;
 
 namespace DoddleReport
 {

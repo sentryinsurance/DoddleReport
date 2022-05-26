@@ -31,6 +31,7 @@ report.DataFields["Price"].DataFormatString = "{0:c}";
 report.DataFields["LastPurchase"].DataFormatString = "{0:d}";
 report.DataFields["Description"].DataStyle.Width = 400;
 report.DataFields["Price"].DataStyle.Width = 200;
+report.RenderHints.BooleansAsYesNo = true;
 
 ProduceReport(new DoddleReport.Writers.HtmlReportWriter(), report, "c:\\temp\\doddlereportHtml.html");
 //ProduceReport(new DoddleReport.Writers.ExcelReportWriter(), report, "c:\\temp\\doddlereportClassicExcel.xls");

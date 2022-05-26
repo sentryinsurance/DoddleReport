@@ -1,51 +1,31 @@
-using System.Configuration;
+
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DoddleReport.Configuration
 {
-    [ConfigurationCollection(typeof(StyleElement), CollectionType = ConfigurationElementCollectionType.BasicMap, AddItemName="style")]
-    public class StyleElementCollection : ConfigurationElementCollection
+    public class StyleElementCollection : List<StyleElement>
     {
-        protected override ConfigurationElement CreateNewElement()
-        {
-            return new StyleElement();
-        }
 
-        protected override object GetElementKey(ConfigurationElement element)
-        {
-            return ((StyleElement)element).Name;
-        }
-
-        public StyleElement this[int index]
+        public StyleElement this[string name]
         {
             get
             {
-                return (StyleElement)BaseGet(index);
-            }
-            set
-            {
-                if (BaseGet(index) != null)
-                {
-                    BaseRemoveAt(index);
-                }
-                BaseAdd(index, value);
+                var existing = this.FirstOrDefault(s => s.Name == name);
+                if (existing != null) return existing;
+                var newStyle = new StyleElement { Name = name };
+                this.Add(newStyle);
+                return newStyle;
             }
         }
 
-        public new StyleElement this[string name]
-        {
-            get
-            {
-                return (StyleElement)BaseGet(name) ?? new StyleElement();
-            }
-        }
-
-        public StyleElement this[ReportRowType rowType]
-        {
-            get
-            {
-                return this[rowType.ToString()];
-            }
-        }
+        //public StyleElement this[ReportRowType rowType]
+        //{
+        //    get
+        //    {
+        //        return this[rowType.ToString()];
+        //    }
+        //}
 
     }
 }

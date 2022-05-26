@@ -1,34 +1,27 @@
 ﻿using DoddleReport.Sample.CoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Diagnostics;
 using System.Drawing;
 
-namespace DoddleReport.Sample.CoreWeb.Pages
+namespace DoddleReport.Sample.CoreWeb.Controllers
 {
-    public class IndexModel : PageModel
+    public class HomeController : Controller
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public ActionResult OnGet()
+        public IActionResult DownloadFile()
         {
-			// for now, we'll manually generate the report
+			var report = ProductReport();
 
-			//var report = ProductReport();
-
-			//return new DoddleReport.Web.ReportResult(report);
-			//var stream = new MemoryStream();
-			//new DoddleReport.OpenXml.ExcelReportWriter().WriteReport(report, stream);
-			//stream.Position = 0;
-			//return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "doddleReportOpenXml.xlsx");
-			return Content("Hello");
+			return new DoddleReport.Web.ReportResult(report);
 		}
 
-		public Report ProductReport()
+		private Report ProductReport()
 		{
 			// Get the data for the report (any IEnumerable will work)
 			var query = DoddleProductRepository.GetAll();
@@ -114,7 +107,5 @@ namespace DoddleReport.Sample.CoreWeb.Pages
 					break;
 			}
 		}
-
-
 	}
 }
