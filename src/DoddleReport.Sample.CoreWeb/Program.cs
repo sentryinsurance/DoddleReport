@@ -2,10 +2,6 @@ using DoddleReport.Web;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.Configure<KestrelServerOptions>(options =>
-{
-    options.AllowSynchronousIO = true;
-});
 // Add services to the container.
 builder.Services.AddRazorPages();
 
