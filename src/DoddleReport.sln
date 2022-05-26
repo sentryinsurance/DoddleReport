@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{0E73989A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample Projects", "Sample Projects", "{2E920538-21EC-49E6-BF72-75E82B2E49E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport", "DoddleReport\DoddleReport.csproj", "{F08B2994-4D05-423E-A8FE-7D1E8A63472B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport", "DoddleReport\DoddleReport.csproj", "{F08B2994-4D05-423E-A8FE-7D1E8A63472B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.AbcPdf", "DoddleReport.AbcPdf\DoddleReport.AbcPdf.csproj", "{355CAFF3-F806-4194-BE54-2F7640463CED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.OpenXml", "DoddleReport.OpenXml\DoddleReport.OpenXml.csproj", "{0646C575-0EA6-4331-809C-10DC000929F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport.OpenXml", "DoddleReport.OpenXml\DoddleReport.OpenXml.csproj", "{0646C575-0EA6-4331-809C-10DC000929F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.Sample.Web", "DoddleReport.Sample.Web\DoddleReport.Sample.Web.csproj", "{28FBF83C-A8A3-418B-A32E-3A725BD37A5C}"
 EndProject
@@ -23,9 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.Sample.WinForm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.Web", "DoddleReport.Web\DoddleReport.Web.csproj", "{A02EF71C-C655-4D93-9CAF-15E527AA4FE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.iTextSharp", "DoddleReport.iTextSharp\DoddleReport.iTextSharp.csproj", "{347D0716-0297-4866-9FD5-5E019B51C408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport.iTextSharp", "DoddleReport.iTextSharp\DoddleReport.iTextSharp.csproj", "{347D0716-0297-4866-9FD5-5E019B51C408}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.Sample.NetCoreConsole", "DoddleReport.Sample.NetCoreConsole\DoddleReport.Sample.NetCoreConsole.csproj", "{56A71CDB-651C-4D10-A8EA-109460B8FA28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoddleReport.Sample.NetCoreConsole", "DoddleReport.Sample.NetCoreConsole\DoddleReport.Sample.NetCoreConsole.csproj", "{56A71CDB-651C-4D10-A8EA-109460B8FA28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoddleReport.Sample.CoreWeb", "DoddleReport.Sample.CoreWeb\DoddleReport.Sample.CoreWeb.csproj", "{628CA528-C931-47B3-B53F-D33FF4931E23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +122,18 @@ Global
 		{56A71CDB-651C-4D10-A8EA-109460B8FA28}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{56A71CDB-651C-4D10-A8EA-109460B8FA28}.Release|x86.ActiveCfg = Release|Any CPU
 		{56A71CDB-651C-4D10-A8EA-109460B8FA28}.Release|x86.Build.0 = Release|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Debug|x86.Build.0 = Debug|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Release|x86.ActiveCfg = Release|Any CPU
+		{628CA528-C931-47B3-B53F-D33FF4931E23}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +142,7 @@ Global
 		{28FBF83C-A8A3-418B-A32E-3A725BD37A5C} = {2E920538-21EC-49E6-BF72-75E82B2E49E2}
 		{12A17D7F-C168-4086-8D6A-DFE311E9EE90} = {2E920538-21EC-49E6-BF72-75E82B2E49E2}
 		{56A71CDB-651C-4D10-A8EA-109460B8FA28} = {2E920538-21EC-49E6-BF72-75E82B2E49E2}
+		{628CA528-C931-47B3-B53F-D33FF4931E23} = {2E920538-21EC-49E6-BF72-75E82B2E49E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CDC6C9E6-2D1D-4F0A-910A-3D6B161C8329}
