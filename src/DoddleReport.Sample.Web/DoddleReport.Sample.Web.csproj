@@ -202,6 +202,10 @@
       <Project>{347D0716-0297-4866-9FD5-5E019B51C408}</Project>
       <Name>DoddleReport.iTextSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DoddleReport.Legacy\DoddleReport.Legacy.csproj">
+      <Project>{ae38aaa1-3332-4e32-bb41-e52681ae3618}</Project>
+      <Name>DoddleReport.Legacy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DoddleReport.OpenXml\DoddleReport.OpenXml.csproj">
       <Project>{0646C575-0EA6-4331-809C-10DC000929F3}</Project>
       <Name>DoddleReport.OpenXml</Name>

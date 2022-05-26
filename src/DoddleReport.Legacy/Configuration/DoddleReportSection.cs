@@ -45,5 +45,15 @@ namespace DoddleReport.Legacy.Configuration
             get { return (string) this["footerRowStyle"]; }
             set { this["footerRowStyle"] = value; }
         }
+
+        public void LoadConfiguration()
+        {
+            Writers.LoadConfiguration();
+            Styles.LoadConfiguration();
+            DoddleReport.Configuration.Config.Report.DefaultWriter = DefaultWriter;
+            DoddleReport.Configuration.Config.Report.FooterRowStyleName = FooterRowStyleName;
+            DoddleReport.Configuration.Config.Report.DataRowStyleName = DataRowStyleName;
+            DoddleReport.Configuration.Config.Report.HeaderRowStyleName = HeaderRowStyleName;
+        }
     }
 }

@@ -15,35 +15,22 @@ namespace DoddleReport.Legacy.Configuration
             return ((StyleElement)element).Name;
         }
 
-        public StyleElement this[int index]
+
+        public void LoadConfiguration()
         {
-            get
+            foreach (StyleElement element in this)
             {
-                return (StyleElement)BaseGet(index);
-            }
-            set
-            {
-                if (BaseGet(index) != null)
+                DoddleReport.Configuration.Config.Report.Styles.Add(new DoddleReport.Configuration.StyleElement
                 {
-                    BaseRemoveAt(index);
-                }
-                BaseAdd(index, value);
-            }
-        }
-
-        public new StyleElement this[string name]
-        {
-            get
-            {
-                return (StyleElement)BaseGet(name) ?? new StyleElement();
-            }
-        }
-
-        public StyleElement this[ReportRowType rowType]
-        {
-            get
-            {
-                return this[rowType.ToString()];
+                     BackColor = element.BackColor, 
+                     Bold = element.Bold,
+                     FontSize = element.FontSize,
+                     ForeColor = element.ForeColor,
+                     Italic = element.Italic,
+                     Name = element.Name,
+                     TextRotation = element.TextRotation,
+                     Underline = element.Underline
+                });
             }
         }
 
