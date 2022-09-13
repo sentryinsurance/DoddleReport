@@ -4,6 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Sentry.DoddleReport.Core.Web</PackageId>
+    <Title>Sentry.DoddleReport.Core.Web</Title>
+    <Version>1.0.0-beta01</Version>
+    <Authors>Sentry Insurance</Authors>
+    <Description>Sentry's fork of DoddleReport.Web that works with .NET Standard.  This package is meant to be used by .NET Core / .NET 6 web applications.  Use Sentry.DoddleReport.Web for full framework web applications.</Description>
+    <RepositoryUrl>https://github.com/sentryinsurance/DoddleReport</RepositoryUrl>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />

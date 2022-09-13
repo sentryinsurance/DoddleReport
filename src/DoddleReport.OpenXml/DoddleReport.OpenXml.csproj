@@ -3,6 +3,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Sentry.DoddleReport.OpenXml</Title>
+    <Version>2.0.0-beta01</Version>
+    <Authors>Sentry Insurance</Authors>
+    <Description>Sentry's fork of DoddleReport.OpenXml that supports .NET Standard. Note that automatically setting columns widths based on the widest content of a column is not currently supported due to a limitation of ClosedXML that should eventually be addressed.  See https://github.com/ClosedXML/ClosedXML/issues/1805</Description>
+    <RepositoryUrl>https://github.com/sentryinsurance/DoddleReport</RepositoryUrl>
+    <PackageId>Sentry.DoddleReport.OpenXml</PackageId>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DocumentationFile>bin\Release\DoddleReport.OpenXml.XML</DocumentationFile>

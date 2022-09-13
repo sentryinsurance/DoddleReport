@@ -19,5 +19,14 @@
 	<ItemGroup>
 	<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
-  <PropertyGroup />
+  <PropertyGroup>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Sentry.DoddleReport</Title>
+    <Version>2.0.0-beta01</Version>
+    <Authors>Sentry Insurance</Authors>
+    <Description>Sentry's fork of DoddleReport that supports .NET Standard</Description>
+    <RepositoryUrl>https://github.com/sentryinsurance/DoddleReport</RepositoryUrl>
+    <PackageId>Sentry.DoddleReport</PackageId>
+    <IncludeSymbols>True</IncludeSymbols>
+  </PropertyGroup>
 </Project>

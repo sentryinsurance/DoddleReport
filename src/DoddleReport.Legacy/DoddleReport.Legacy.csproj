@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Sentry.DoddleReport.Legacy</Title>
+    <Version>1.0.0-beta01</Version>
+    <Authors>Sentry Insurance</Authors>
+    <Description>Supports configuring DoddleReport via a legacy app.config / web.config file. Only needed to support full framework applications.  If you have a .NET 6 application, you will want to configure DoddleReport via code. </Description>
+    <RepositoryUrl>https://github.com/sentryinsurance/DoddleReport</RepositoryUrl>
+    <PackageId>Sentry.DoddleReport.Legacy</PackageId>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>

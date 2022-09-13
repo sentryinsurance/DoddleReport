@@ -4,6 +4,15 @@
     <OutputType>Library</OutputType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Sentry.DoddleReport.iTextSharp</Title>
+    <Version>2.0.0-beta01</Version>
+    <Authors>Sentry Insurance</Authors>
+    <Description>Sentry's fork of DoddleReport.iTextSharp that supports .NET Standard</Description>
+    <RepositoryType></RepositoryType>
+    <RepositoryUrl>https://github.com/sentryinsurance/DoddleReport</RepositoryUrl>
+    <PackageId>Sentry.DoddleReport.iTextSharp</PackageId>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DocumentationFile>bin\Release\DoddleReport.iTextSharp.XML</DocumentationFile>

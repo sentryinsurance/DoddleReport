@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>$id$</id>
+    <id>Sentry.DoddleReport.Web</id>
     <version>$version$</version>
-    <title>$id$</title>
-    <description>$description$</description>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
-    <projectUrl>https://github.com/matthidinger/DoddleReport</projectUrl>
+    <title>Sentry.DoddleReport.Web</title>
+    <description>Sentry's fork of DoddleReport.Web that works with .NET Standard. This package is meant to be used by full framework web applications.  Use Sentry.DoddleReport.Core.Web for .NET Core / .NET 6 web applications.</description>
+    <authors>Sentry Insurance</authors>
+    <owners>Sentry Insurance</owners>
+    <projectUrl>https://github.com/sentryinsurance/DoddleReport</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <tags>doddle.report doddle.reporting doddle reporting pdf excel csv</tags>
     <dependencies>
       <dependency id="DoddleReport" version="$version$" />
     </dependencies>
